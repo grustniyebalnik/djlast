@@ -13,10 +13,14 @@ menu = [{'title': "О сайте", 'url_name': "about"},
 
 def index(request):
     products = Equipment.objects.all()
+    cats = Category.objects.all()
+
     context={
         'products': products,
+        'cats': cats,
         'menu': menu,
-        'title': 'main page'
+        'title': 'Главная страница',
+        'cat_selected': 0,
     }
     return render(request, 'equipment/index.html', context=context)
 
@@ -32,8 +36,26 @@ def contact(request):
 def login(request):
     return HttpResponse("login")
 
+
 def show_prod(request, prod_id):
     return HttpResponse(f"product with id = {prod_id}")
+
+
+def show_category(request, cat_id):
+    products = Equipment.objects.filter(cat_id=cat_id)
+    cats = Category.objects.all()
+
+    if len(products) == 0:
+        raise Http404()
+
+    context={
+        'products': products,
+        'cats': cats,
+        'menu': menu,
+        'title': 'Категории',
+        'cat_selected': cat_id,
+    }
+    return render(request, 'equipment/index.html', context=context)
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена:(</h1>')
