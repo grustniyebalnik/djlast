@@ -4,5 +4,8 @@ from .views import *
 urlpatterns = [
     path('', index, name='home'),
     path('about/', about, name='about'),
-    re_path(r'^archive/(?P<year>[0-9]{4})/', archive),
+    path('add_page/', addpage, name='add_product'),
+    path('contact/', contact, name='contact'),
+    path('login/', login, name='login'),
+    path('product/<int:prod_id>', show_prod, name='prod'),
 ]

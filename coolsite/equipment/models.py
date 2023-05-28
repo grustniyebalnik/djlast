@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.urls import reverse
 class Equipment(models.Model):
     title = models.CharField(max_length=255)
     price = models.IntegerField()
@@ -9,3 +9,6 @@ class Equipment(models.Model):
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('prod', kwargs={'prod_id': self.pk})
