@@ -4,11 +4,14 @@
 {% block content %}
 <ul class="list-articles">
 	{% for p in products %}
-	<div class="article-panel">
+	<li><div class="article-panel">
 	<p class="first">Категория: {{p.cat}}</p></div>
-			<li><h2>{{p.title}}</h2>
+		{% if p.photo %}
+			<p><img class="img-article-left thumb" src="{{p.photo.url}}"></p>
+		{% endif %}
+			<h2>{{p.title}}</h2>
 	{% autoescape on %}
-	{{p.content|linebreaks|truncatewords:50}}
+	{{p.content|linebreaks|truncatewords:10}}
 	{% endautoescape %}
 			<div class="clear"></div>
 			<p class="link-read-post"><a href="{{ p.get_absolute_url }}">подробнее</a></p>
