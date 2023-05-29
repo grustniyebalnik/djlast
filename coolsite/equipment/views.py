@@ -13,11 +13,9 @@ menu = [{'title': "О сайте", 'url_name': "about"},
 
 def index(request):
     products = Equipment.objects.all()
-    cats = Category.objects.all()
 
     context={
         'products': products,
-        'cats': cats,
         'menu': menu,
         'title': 'Главная страница',
         'cat_selected': 0,
@@ -43,14 +41,12 @@ def show_prod(request, prod_id):
 
 def show_category(request, cat_id):
     products = Equipment.objects.filter(cat_id=cat_id)
-    cats = Category.objects.all()
 
     if len(products) == 0:
         raise Http404()
 
     context={
         'products': products,
-        'cats': cats,
         'menu': menu,
         'title': 'Категории',
         'cat_selected': cat_id,
