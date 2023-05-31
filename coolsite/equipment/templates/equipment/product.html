@@ -1,0 +1,11 @@
+{% extends 'equipment/base.html' %}
+
+{% block content %}
+    <h1>{{product.title}}</h1>
+
+    {% if product.photo %}
+<p><img class="img-article-left" src="{{product.photo.url}}" alt="photo not found"></p>
+    {% endif %}
+
+{{product.content|linebreaks}}
+{% endblock %}
