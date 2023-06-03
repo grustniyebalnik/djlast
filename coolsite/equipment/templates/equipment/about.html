@@ -2,5 +2,16 @@
 
 {% block content %}
 <h1>{{ title }}</h1>
-<p>содержимое страницы о нас</p>
+{% for contact in page_obj %}
+<p>{{ contact }}</p>
+{% endfor %}
+
+<nav>
+    <ul>
+        {% for p in page_obj.paginator.page_range %}
+        <a href="?page={{ p }}">{{ p }}</a>
+        {% endfor %}
+    </ul>
+</nav>
+
 {% endblock %}
